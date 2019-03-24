@@ -35,22 +35,22 @@
 
         $('#register').validate({
             rules: {
-                username: {
-                    required: true,
-                    maxlength: 10,
-
-                    remote: {
-                        url: 'checkuser.php',
-                        type: "post",
-                        data: {                     //要传递的数据
-                            username: function () {
-                                // let uname = $("#username").val();
-                                return $("#username").val();
-                            }
-                        },
-
-                    }
-                },
+                // username: {
+                //     required: true,
+                //     maxlength: 10,
+                //
+                //     remote: {
+                //         url: 'checkuser.php',
+                //         type: "post",
+                //         data: {                     //要传递的数据
+                //             username: function () {
+                //                 // let uname = $("#username").val();
+                //                 return $("#username").val();
+                //             }
+                //         },
+                //
+                //     }
+                // },
                 realname: {
                     required: true,
                     maxlength: 10,
@@ -73,11 +73,11 @@
             },
 
             messages: {
-                username: {
-                    required: "请给一个账户名",
-                    maxlength: "请输入不超过10个字符",
-                    remote: "此账户名已存在"
-                },
+                // username: {
+                //     required: "请给一个账户名",
+                //     maxlength: "请输入不超过10个字符",
+                //     remote: "此账户名已存在"
+                // },
                 realname: {
                     required: "请输入您的真实姓名",
                     maxlength: "请输入不超过10个字符",
@@ -150,7 +150,10 @@
                     alert('注册成功！');
                     $(window.location).attr('href','login.html');
                 }else if(res["Status"]==100){
-                    alert('错误！');
+                    alert('注册失败！');
+
+                }else if(res["Status"]==50){
+                    alert('用户'+res["user"]+'已存在，注册失败！');
 
                 }
             }
@@ -170,9 +173,6 @@
         <div class="row">
             <div class="col-lg-8 col-md-8 col-sm-12 right">
                 <h3 class="col-sm-offset-4 col-sm-10 center">注册</h3>
-
-                <!--<h3 class="col-sm-offset-9 col-sm-4 ">注册</h3>-->
-
                 <form id="register" class="form-horizontal" role="form" onsubmit="register.php">
                     <div class="form-group">
                         <label for="username" class="col-sm-6 control-label">用户名：</label><input class="col-sm-6"

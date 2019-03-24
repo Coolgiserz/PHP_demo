@@ -13,18 +13,10 @@ define('DB_NAME','webgisdb');
 define('DB_USER','postgres');
 define('DB_PASSWD','');
 //$dbconn = new PDO("pgsql:dbname=$dbname;host=$host", $dbuser, $dbpass);
-
 $dbname = "webgisdb";
 $dbuser = "postgres";
 $dbpass = "";
 $host = "127.0.0.1";
-
-//if(!$dbconn){//数据库连接错误
-//    echo "Error";
-//} else{//数据库连接成功
-//    echo "Good";
-//}
-
 function insertData($tbname,$data){
 
 }

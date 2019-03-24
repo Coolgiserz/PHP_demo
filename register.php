@@ -12,6 +12,7 @@ if(isset($_REQUEST["username"])&&
     isset($_REQUEST["mobile"])){
 
     include('dbconn.php');
+    include ('helper.php');
 //$dbconn = new PDO("pgsql:dbname=$dbname;host=$host", $dbuser, $dbpass);
     $dbstr = "host=" . HOST . " port=" . PORT . " dbname=" . DB_NAME . " user=" . DB_USER;
     $dbconn = pg_connect($dbstr);
@@ -32,6 +33,11 @@ if(isset($_REQUEST["username"])&&
         ));
     } else {//数据库连接成功
         if($user==""){
+            exit(1);
+        }
+        $has_user = check_user($dbconn, $user);
+        if($has_user){
+            repet_tips($user);//提示用户名已存在
             exit(1);
         }
         $sql = "insert into todo_user" . " " . '("user",passwd,realname,email,mobile) ' . " values($1,$2,$3,$4,$5)";

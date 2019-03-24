@@ -2,7 +2,7 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="7b7cb9c4-eb36-400e-ad30-e553b56fa3a4" name="localhost" url="http://localhost:8000/MyToDoLists">
+      <webServer id="7b7cb9c4-eb36-400e-ad30-e553b56fa3a4" name="localhost" url="http://localhost:8000/PHP_demo">
         <fileTransfer port="0" accessType="LOCAL" />
       </webServer>
       <webServer id="09d7ac6b-0aa3-4e49-86b7-1639a6c9813f" name="remote" url="http://47.104.28.111">

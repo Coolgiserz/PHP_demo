@@ -9,7 +9,9 @@ if(isset($_REQUEST['username'])){
 
 
     $user = $_REQUEST["username"];
-    $dbstr = "host=127.0.0.1 port=5432 dbname=webgisdb user=postgres";
+    include('dbconn.php');
+    $dbstr = "host=" . HOST . " port=" . PORT . " dbname=" . DB_NAME . " user=" . DB_USER;
+//    $dbstr = "host=127.0.0.1 port=5432 dbname=webgisdb user=postgres";
     $dbconn = pg_connect($dbstr);
     if (!$dbconn) {
         die("请稍后再试");
@@ -35,7 +37,7 @@ if(isset($_REQUEST['username'])){
         } else {//存在此用户，提示用户换一个账号名
             echo true;
         }
-
+        pg_freeresult($result);
         pg_close($dbconn);
     }
 
