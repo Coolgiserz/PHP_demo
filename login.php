@@ -14,7 +14,8 @@ if (isset($_REQUEST["username"]) && isset($_REQUEST["password"])) {
 //$passwd = "";
 // 连接postgres数据库
     include('helper.php');
-    $dbstr = "host=127.0.0.1 port=5432 dbname=webgisdb user=postgres";
+    include('dbconn.php');
+    $dbstr = "host=" . HOST . " port=" . PORT . " dbname=" . DB_NAME . " user=" . DB_USER;
     $dbconn = pg_connect($dbstr);
     if (!$dbconn) {
         die("请稍后再试");

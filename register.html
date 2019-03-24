@@ -24,6 +24,9 @@
 
     $(document).ready(function () {
         $(':text:first').focus();
+        $('#returnlogin').on('click',function () {
+            $(window.location).attr('href','login.html');
+        })
         $.validator.addMethod("isMobile", function(value, element) {
             var length = value.length;
             var mobile = /^(13[0-9]{9})|(18[0-9]{9})|(14[0-9]{9})|(17[0-9]{9})|(15[0-9]{9})$/;
@@ -110,7 +113,7 @@
         $('#registerbtn').on('click', function (evt) {
             evt.preventDefault();
             if ($('#register').valid()) {
-                $(this).prop('disabled', 'disabled');
+                // $(this).prop('disabled', 'disabled');
                 onRegister();
             }else{
                 alert('请认真填写表单');
@@ -143,13 +146,16 @@
                 });
             function onSuccess(response) {
                 let res = JSON.parse(JSON.stringify(response));
-                if(res["success"]==true){
+                if(res["Status"]==200){
                     alert('注册成功！');
                     $(window.location).attr('href','login.html');
+                }else if(res["Status"]==100){
+                    alert('错误！');
+
                 }
             }
-            function onError(msg) {
-                alert('错误');
+            function onError() {
+                alert('错误！！');
 
             }
         }
@@ -161,58 +167,59 @@
     <header>
     </header>
     <div class="main-content">
-    <div class="row">
-        <div class="col-lg-8 col-md-8 col-sm-12 right">
-            <h3 class="col-sm-offset-4 col-sm-10 center">注册</h3>
+        <div class="row">
+            <div class="col-lg-8 col-md-8 col-sm-12 right">
+                <h3 class="col-sm-offset-4 col-sm-10 center">注册</h3>
 
-            <!--<h3 class="col-sm-offset-9 col-sm-4 ">注册</h3>-->
+                <!--<h3 class="col-sm-offset-9 col-sm-4 ">注册</h3>-->
 
-            <form id="register" class="form-horizontal" role="form" onsubmit="register.php">
-                <div class="form-group">
-                    <label for="username" class="col-sm-6 control-label">用户名：</label><input class="col-sm-6"
-                                                                                            id="username" type="text"
-                                                                                            name="username"
-                                                                                            placeholder="请输入账户名">
-                </div>
-                <div class="form-group">
-                    <label for="password" class="col-sm-6 control-label">密码：</label><input class="col-sm-6 "
-                                                                                           id="password" name="password"
-                                                                                           type="password"
-                                                                                           placeholder="请输入密码">
-                </div>
-                <div class="form-group">
-                    <label for="confirm_password" class="col-sm-6 control-label">确认密码：</label><input
-                        name="confirm_password" id="confirm_password" type="password" class="col-sm-6 "
-                        placeholder="请确认密码">
-                </div>
-                <div class="form-group">
-                    <label for="realname" class="col-sm-6 control-label">真实姓名：</label><input class="col-sm-6 "
-                                                                                             id="realname" type="text"
-                                                                                             name="realname"
-                                                                                             placeholder="请输入真实姓名">
-                </div>
-                <div class="form-group">
-                    <label for="email" class="col-sm-6 control-label">邮箱：</label><input class="col-sm-6 " name="email"
-                                                                                        id="email"
-                                                                                        type="email"
-                                                                                        placeholder="请输入邮箱">
-                </div>
-                <div class="form-group">
-                    <label for="mobile" class="col-sm-6 control-label">电话号码：</label><input class="col-sm-6 "
-                                                                                           name="mobile"
-                                                                                           id="mobile"
-                                                                                           type="tel"
-                                                                                           placeholder="请输入您的电话号码">
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-offset-11 col-sm-2">
-                        <button name="registerbtn" id="registerbtn" type="button" class="btn btn-default">注册</button>
+                <form id="register" class="form-horizontal" role="form" onsubmit="register.php">
+                    <div class="form-group">
+                        <label for="username" class="col-sm-6 control-label">用户名：</label><input class="col-sm-6"
+                                                                                                id="username" type="text"
+                                                                                                name="username"
+                                                                                                placeholder="请输入账户名">
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="col-sm-6 control-label">密码：</label><input class="col-sm-6 "
+                                                                                               id="password" name="password"
+                                                                                               type="password"
+                                                                                               placeholder="请输入密码">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm_password" class="col-sm-6 control-label">确认密码：</label><input
+                            name="confirm_password" id="confirm_password" type="password" class="col-sm-6 "
+                            placeholder="请确认密码">
+                    </div>
+                    <div class="form-group">
+                        <label for="realname" class="col-sm-6 control-label">真实姓名：</label><input class="col-sm-6 "
+                                                                                                 id="realname" type="text"
+                                                                                                 name="realname"
+                                                                                                 placeholder="请输入真实姓名">
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="col-sm-6 control-label">邮箱：</label><input class="col-sm-6 " name="email"
+                                                                                            id="email"
+                                                                                            type="email"
+                                                                                            placeholder="请输入邮箱">
+                    </div>
+                    <div class="form-group">
+                        <label for="mobile" class="col-sm-6 control-label">电话号码：</label><input class="col-sm-6 "
+                                                                                               name="mobile"
+                                                                                               id="mobile"
+                                                                                               type="tel"
+                                                                                               placeholder="请输入您的电话号码">
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-8 col-sm-2">
+                            <button name="returnlogin" id="returnlogin" type="button" class="btn btn-default">返回</button>
+                            <button name="registerbtn" id="registerbtn" type="button" class="btn btn-default">注册</button>
+
+                        </div>
 
                     </div>
-
-                </div>
-            </form>
-        </div></div>
+                </form>
+            </div></div>
     </div>
 </div>
 </body>

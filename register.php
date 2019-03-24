@@ -13,7 +13,6 @@ if(isset($_REQUEST["username"])&&
 
     include('dbconn.php');
 //$dbconn = new PDO("pgsql:dbname=$dbname;host=$host", $dbuser, $dbpass);
-//$dbstr = "host=127.0.0.1 port=5432 dbname=webgisdb user=postgres";
     $dbstr = "host=" . HOST . " port=" . PORT . " dbname=" . DB_NAME . " user=" . DB_USER;
     $dbconn = pg_connect($dbstr);
 //$user = "res";
