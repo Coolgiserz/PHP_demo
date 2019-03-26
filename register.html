@@ -14,10 +14,7 @@
 
 </head>
 <style>
-    .error {
-        color: #F00;
-        aligh: auto 0;
-    }
+
 </style>
 <script>
 
@@ -26,18 +23,23 @@
         $(':text:first').focus();
         $('#returnlogin').on('click',function () {
             $(window.location).attr('href','login.html');
-        })
+        });
         $.validator.addMethod("isMobile", function(value, element) {
             var length = value.length;
             var mobile = /^(13[0-9]{9})|(18[0-9]{9})|(14[0-9]{9})|(17[0-9]{9})|(15[0-9]{9})$/;
             return this.optional(element) || (length == 11 && mobile.test(value));
         }, "请输入有效的手机号码!!");
+        $.validator.addMethod("isValid", function(value, element) {
+            var valid = /^[a-zA-Z0-9_]{1,10}$/;
+            return this.optional(element) || (valid.test(value));
+        }, "请输入有效的手机号码!!");
 
         $('#register').validate({
             rules: {
-                // username: {
-                //     required: true,
-                //     maxlength: 10,
+                 username: {
+                     required: true,
+                     maxlength: 10,
+                     isValid:true
                 //
                 //     remote: {
                 //         url: 'checkuser.php',
@@ -50,7 +52,7 @@
                 //         },
                 //
                 //     }
-                // },
+                 },
                 realname: {
                     required: true,
                     maxlength: 10,
@@ -73,11 +75,12 @@
             },
 
             messages: {
-                // username: {
-                //     required: "请给一个账户名",
-                //     maxlength: "请输入不超过10个字符",
-                //     remote: "此账户名已存在"
-                // },
+                username: {
+                    required: "请给一个账户名",
+                    maxlength: "请输入不超过10个字符",
+                    // remote: "此账户名已存在"
+                    isValid:"用户名只能由数字、字母和下划线组成"
+                },
                 realname: {
                     required: "请输入您的真实姓名",
                     maxlength: "请输入不超过10个字符",
@@ -146,13 +149,13 @@
                 });
             function onSuccess(response) {
                 let res = JSON.parse(JSON.stringify(response));
-                if(res["Status"]==200){
+                if(res["Status"]===200){
                     alert('注册成功！');
                     $(window.location).attr('href','login.html');
-                }else if(res["Status"]==100){
+                }else if(res["Status"]===100){
                     alert('注册失败！');
 
-                }else if(res["Status"]==50){
+                }else if(res["Status"]===50){
                     alert('用户'+res["user"]+'已存在，注册失败！');
 
                 }
@@ -173,7 +176,7 @@
         <div class="row">
             <div class="col-lg-8 col-md-8 col-sm-12 right">
                 <h3 class="col-sm-offset-4 col-sm-10 center">注册</h3>
-                <form id="register" class="form-horizontal" role="form" onsubmit="register.php">
+                <form id="register" class="form-horizontal" role="form">
                     <div class="form-group">
                         <label for="username" class="col-sm-6 control-label">用户名：</label><input class="col-sm-6"
                                                                                                 id="username" type="text"
